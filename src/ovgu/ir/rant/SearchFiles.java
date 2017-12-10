@@ -80,12 +80,11 @@ public class SearchFiles {
 			ScoreDoc[] hits = results.scoreDocs;
 			int numTotalHits = Math.toIntExact(results.totalHits);
 			
-			int end = Math.min(maxHitsDisplay, numTotalHits);
-			
 			// Get the lesser value between maximum hits to display and 
 			// the actual number of hits. If hits are more than max hits 
 			// to display, iterate to maxHitsDisplay. Else iterate to
 			// the number of hits
+			int end = Math.min(maxHitsDisplay, numTotalHits);
 			
 			System.out.println("Total " + numTotalHits + " Matching Documents Found");
 			System.out.println("Showing Top " + end + "\n");
