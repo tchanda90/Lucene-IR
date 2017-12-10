@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
+import java.util.Date;
+
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -64,6 +66,7 @@ public class SearchFiles {
 		Query query = mfparser.parse(q);
 		
 		System.out.println("\nSearching For: " + q + "\n");
+		
 		// Call the method that executes the search
 		doPagingSearch(in, searcher, query, maxHitsDisplay);
 
@@ -75,6 +78,8 @@ public class SearchFiles {
 	public static void doPagingSearch(BufferedReader in, IndexSearcher searcher, Query query,
 			int maxHitsDisplay) throws IOException {
 
+			Date startDate = new Date();
+		
 			// Collect hits
 			TopDocs results = searcher.search(query, maxHitsDisplay);
 			ScoreDoc[] hits = results.scoreDocs;
@@ -86,10 +91,12 @@ public class SearchFiles {
 			// the number of hits
 			int end = Math.min(maxHitsDisplay, numTotalHits);
 			
-			System.out.println("Total " + numTotalHits + " Matching Documents Found");
+			Date endDate = new Date();
+			
+			System.out.println("Total " + numTotalHits + " Matching Documents Found in " + ((endDate.getTime() - startDate.getTime()) / 1000.0) + " Seconds");
 			System.out.println("Showing Top " + end + "\n");
 			
-			// Iterate over the hits array
+			// Iterate ov er the hits array
 			for (int i = 0; i < end; i++) {
 
 				Document doc = searcher.doc(hits[i].doc);
