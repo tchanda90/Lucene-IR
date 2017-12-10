@@ -26,7 +26,7 @@
 					<target>1.8</target>
 					<archive>
 						<manifest>
-							<mainClass>Main</mainClass>
+							<mainClass>ovgu.ir.rant.Main</mainClass>
 						</manifest>
 					</archive>
 					<!-- Description appended after jar -->
